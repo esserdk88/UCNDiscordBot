@@ -1,23 +1,29 @@
 package UCNDiscordBot;
 
+import java.util.HashMap;
+import java.util.List;
+
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class PlayerCount {
-    // get all players
-    public static String getPlayers(MessageReceivedEvent event) {
-        return "CS:GO: " + getGameCount(event, "CS:GO") + "\n" +
-                "theHunter: " + getGameCount(event, "theHunter: Call of the wild");
-    }
-
-    private static int getGameCount(MessageReceivedEvent event, String game) {
-        // count how many have role of game
-        int count = 0;
-        for (int i = 0; i < event.getGuild().getMembers().size(); i++) {
-            if (event.getGuild().getMembers().get(i).getRoles()
-                    .contains(event.getGuild().getRolesByName(game, true).get(0))) {
-                count++;
+    public static HashMap getRoleCount(MessageReceivedEvent event) {
+        HashMap<String, Integer> roleCount = new HashMap<String, Integer>();
+        // get all roles
+        List<Role> roles = event.getGuild().getRoles();
+        // loop through all roles
+        for (Role role : roles) {
+            // exclude the @everyone role, op and UCN Bot
+            if (!role.getName().equals("@everyone") && !role.getName().equals("OP")
+                    && !role.getName().equals("UCN Bot")) {
+                // get the number of members with the role
+                int count = event.getGuild().getMembersWithRoles(role).size();
+                // add the role and count to the hashmap
+                roleCount.put(role.getName(), count);
             }
         }
-        return count;
+        System.out.println("x");
+
+        return roleCount;
     }
 }

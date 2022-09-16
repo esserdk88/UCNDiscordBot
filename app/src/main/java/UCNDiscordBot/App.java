@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 public class App extends ListenerAdapter {
     private static String discordToken = new GetAPIKey().getDiscordKey();
@@ -16,13 +17,12 @@ public class App extends ListenerAdapter {
     public static void main(String[] args) {
         // Create a new JDABuilder instance
         JDABuilder builder = JDABuilder
-                .createDefault(discordToken);
+                .create(discordToken, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES);
 
         // Set the activity for the session
         builder.setActivity(Activity.watching("på dig i badet"));
 
-        // Enable gateway intent to read messages
-        builder.enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS);
+        builder.setMemberCachePolicy(MemberCachePolicy.ALL);
 
         // Add the listeners
         builder.addEventListeners(new MessageListener());

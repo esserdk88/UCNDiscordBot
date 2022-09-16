@@ -1,5 +1,6 @@
 package UCNDiscordBot;
 
+import java.util.HashMap;
 import java.util.Random;
 
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -64,7 +65,7 @@ public class MessageListener extends ListenerAdapter {
         if (event.getMessage().getContentDisplay().startsWith("!give")) {
             String[] args = event.getMessage().getContentDisplay().split(" ");
             if (args.length == 2) {
-                GiveRole.giveRole(event, args[1]);
+                ChangeRole.giveRole(event, args[1]);
             } else {
                 event.getChannel().sendMessage("Invalid arguments").queue();
             }
@@ -74,7 +75,7 @@ public class MessageListener extends ListenerAdapter {
         if (event.getMessage().getContentDisplay().startsWith("!remove")) {
             String[] args = event.getMessage().getContentDisplay().split(" ");
             if (args.length == 2) {
-                RemoveRole.removeRole(event, args[1]);
+                ChangeRole.removeRole(event, args[1]);
             } else {
                 event.getChannel().sendMessage("Invalid arguments").queue();
             }
@@ -87,7 +88,14 @@ public class MessageListener extends ListenerAdapter {
 
         // Check if message is "!playercount"
         if (event.getMessage().getContentDisplay().equals("!playercount")) {
-            event.getChannel().sendMessage(PlayerCount.getPlayers(event)).queue();
+            HashMap<String, Integer> roles = new HashMap<String, Integer>();
+            roles = PlayerCount.getRoleCount(event);
+            // Print the roles and the number of people in each role in one message
+            String message = "";
+            for (String key : roles.keySet()) {
+                message += key + ": " + roles.get(key) + "\n";
+            }
+            event.getChannel().sendMessage(message).queue();
         }
 
         // Check if the message is "!help"
