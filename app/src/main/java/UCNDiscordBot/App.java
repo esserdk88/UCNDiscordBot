@@ -22,7 +22,7 @@ public class App extends ListenerAdapter {
         builder.setActivity(Activity.watching("på dig i badet"));
 
         // Enable gateway intent to read messages
-        builder.enableIntents(GatewayIntent.MESSAGE_CONTENT);
+        builder.enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS);
 
         // Add the listeners
         builder.addEventListeners(new MessageListener());

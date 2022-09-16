@@ -37,5 +37,24 @@ public class MessageListener extends ListenerAdapter {
             }
         }
 
+        // Check if the message is "!roles"
+        if (event.getMessage().getContentDisplay().equals("!roles")) {
+            event.getChannel().sendMessage(AvailableRoles.getRoles(event)).queue();
+        }
+
+        // Check if message is "!playercount"
+        if (event.getMessage().getContentDisplay().equals("!playercount")) {
+            event.getChannel().sendMessage(PlayerCount.getPlayers(event)).queue();
+        }
+
+        // Check if the message is "!help"
+        if (event.getMessage().getContentDisplay().equals("!help")) {
+            event.getChannel().sendMessage("Available commands:\n"
+                    + "!ping - Respons with Pong!\n"
+                    + "!roles - Gives a list of available roles you can get!\n"
+                    + "!give <role> - Assign you with a role from the list!\n"
+                    + "!remove <role> - Remove the role you specified!")
+                    .queue();
+        }
     }
 }

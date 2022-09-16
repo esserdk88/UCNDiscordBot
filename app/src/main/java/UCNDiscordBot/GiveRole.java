@@ -16,6 +16,5 @@ public class GiveRole {
         } else {
             event.getChannel().sendMessage("I can't give you the role").queue();
         }
-
     }
 }
