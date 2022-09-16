@@ -9,7 +9,7 @@ public class PlayerCount {
                 "theHunter: " + getGameCount(event, "theHunter: Call of the wild");
     }
 
-    public static int getGameCount(MessageReceivedEvent event, String game) {
+    private static int getGameCount(MessageReceivedEvent event, String game) {
         // count how many have role of game
         int count = 0;
         for (int i = 0; i < event.getGuild().getMembers().size(); i++) {

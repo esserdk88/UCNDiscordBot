@@ -5,3 +5,4 @@
 build
 app/bin/main/UCNDiscordBot/GetAPIKey.class
 app/src/main/java/UCNDiscordBot/GetAPIKey.java
+.vscode

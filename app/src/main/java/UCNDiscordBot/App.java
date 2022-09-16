@@ -11,12 +11,12 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
 public class App extends ListenerAdapter {
-    private static String token = new GetAPIKey().apiKey;
+    private static String discordToken = new GetAPIKey().getDiscordKey();
 
     public static void main(String[] args) {
         // Create a new JDABuilder instance
         JDABuilder builder = JDABuilder
-                .createDefault(token);
+                .createDefault(discordToken);
 
         // Set the activity for the session
         builder.setActivity(Activity.watching("på dig i badet"));
