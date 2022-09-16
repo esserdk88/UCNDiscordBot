@@ -22,7 +22,6 @@ public class PlayerCount {
                 roleCount.put(role.getName(), count);
             }
         }
-        System.out.println("x");
 
         return roleCount;
     }

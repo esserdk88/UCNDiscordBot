@@ -61,11 +61,11 @@ public class MessageListener extends ListenerAdapter {
             event.getChannel().sendMessage(Integer.toString(index)).queue();
         }
 
-        // Check if the message is "!role" and arguments
+        // Check if the message is "!give" and arguments
         if (event.getMessage().getContentDisplay().startsWith("!give")) {
-            String[] args = event.getMessage().getContentDisplay().split(" ");
-            if (args.length == 2) {
-                ChangeRole.giveRole(event, args[1]);
+            String args = event.getMessage().getContentDisplay().substring(6);
+            if (args.length() > 0) {
+                ChangeRole.giveRole(event, args);
             } else {
                 event.getChannel().sendMessage("Invalid arguments").queue();
             }
@@ -73,9 +73,9 @@ public class MessageListener extends ListenerAdapter {
 
         // Check if the message is "!remove" and arguments
         if (event.getMessage().getContentDisplay().startsWith("!remove")) {
-            String[] args = event.getMessage().getContentDisplay().split(" ");
-            if (args.length == 2) {
-                ChangeRole.removeRole(event, args[1]);
+            String args = event.getMessage().getContentDisplay().substring(8);
+            if (args.length() > 0) {
+                ChangeRole.removeRole(event, args);
             } else {
                 event.getChannel().sendMessage("Invalid arguments").queue();
             }
@@ -107,8 +107,8 @@ public class MessageListener extends ListenerAdapter {
                     + "!gif <search> - Search for a gif. If blank a random gif will be found\n"
                     + "!roles - Gives a list of available roles you can get!\n"
                     + "!give <role> - Assign you with a role from the list!\n"
-                    + "!remove <role> - Remove the role you specified!")
-                    .queue();
+                    + "!remove <role> - Remove the role you specified!\n"
+                    + "!playercount - Gives a list of roles and the number of people in each role!").queue();
         }
     }
 }
