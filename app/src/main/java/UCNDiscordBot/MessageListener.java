@@ -108,7 +108,15 @@ public class MessageListener extends ListenerAdapter {
                     + "!roles - Gives a list of available roles you can get!\n"
                     + "!give <role> - Assign you with a role from the list!\n"
                     + "!remove <role> - Remove the role you specified!\n"
-                    + "!playercount - Gives a list of roles and the number of people in each role!").queue();
+                    + "!playercount - Gives a list of roles and the number of people in each role!"
+                    + "\n\nMusic Player commands:"
+                    + "!play <URL> - Takes YouTube URl as input"
+                    + "!pause - Pauses the current song"
+                    + "!resume - Resumes the current song"
+                    + "!skip - Skips the current song"
+                    + "!queue - Shows the current queue"
+                    + "!clear - Clears the current queue"
+                    + "!disconnect - Disconnects the bot from the voice channel").queue();
         }
     }
 }

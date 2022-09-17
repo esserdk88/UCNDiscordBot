@@ -5,11 +5,12 @@ package UCNDiscordBot;
 
 import javax.security.auth.login.LoginException;
 
+import UCNDiscordBot.MusicPlayer.*;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import net.dv8tion.jda.api.utils.MemberCachePolicy;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 public class App extends ListenerAdapter {
     private static String discordToken = new GetAPIKey().getDiscordKey();
@@ -17,15 +18,19 @@ public class App extends ListenerAdapter {
     public static void main(String[] args) {
         // Create a new JDABuilder instance
         JDABuilder builder = JDABuilder
-                .create(discordToken, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES);
+                .create(discordToken, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES,
+                        GatewayIntent.GUILD_VOICE_STATES, GatewayIntent.MESSAGE_CONTENT);
 
         // Set the activity for the session
         builder.setActivity(Activity.watching("på dig i badet"));
 
-        builder.setMemberCachePolicy(MemberCachePolicy.ALL);
+        // Disable cache
+        builder.disableCache(CacheFlag.ACTIVITY, CacheFlag.EMOJI, CacheFlag.STICKER, CacheFlag.CLIENT_STATUS,
+                CacheFlag.ONLINE_STATUS);
 
         // Add the listeners
         builder.addEventListeners(new MessageListener());
+        builder.addEventListeners(new MusicPlayer());
 
         // Build the JDA instance
         try {
