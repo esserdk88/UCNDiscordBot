@@ -177,7 +177,7 @@ public class MusicPlayer extends ListenerAdapter {
         boolean isConnected = connectToVoiceChannel(channel.getGuild().getAudioManager(), channel);
 
         if (isConnected) {
-            channel.getChannel().sendMessage("Playing: " + track.getInfo().title).queue();
+            channel.getChannel().sendMessage("Now Playing: " + track.getInfo().title).queue();
             musicManager.scheduler.queue(track);
         }
     }
